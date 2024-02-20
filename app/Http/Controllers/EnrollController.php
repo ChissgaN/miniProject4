@@ -12,8 +12,8 @@ class EnrollController extends Controller
      */
     public function index()
     {
-        $matricula = Enroll::all();
-        return response()->json($matricula);
+        $enroll = Enroll::all();
+        return response()->json($enroll);
     }
 
     /**
@@ -34,16 +34,17 @@ class EnrollController extends Controller
             'subject_id' => 'required',
         ]);
 
-        $matricula = Enroll::create($request->all());
-        return response()->json(['student' => $matricula,] );
+        $enroll = Enroll::create($request->all());
+        return response()->json(['student' => $enroll,] );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Enroll $enroll)
+    public function show($id)
     {
-        //
+        $enroll = Enroll::findOrFail($id);
+        return response()->json($enroll);
     }
 
     /**
@@ -57,16 +58,27 @@ class EnrollController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Enroll $enroll)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'student_id' => 'required',
+            'subject_id' => 'required',
+
+        ]);
+
+        $enroll = Enroll::findOrFail($id);
+        $enroll->update($request->all());
+        return response()->json($enroll);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Enroll $enroll)
+    public function destroy( $id)
     {
-        //
+        $enroll = Enroll::findOrFail($id);
+        $enroll->delete();
+        return response()->json($enroll);
     }
 }

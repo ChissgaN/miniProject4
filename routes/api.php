@@ -41,8 +41,13 @@ Route::get('/subject/{id}', [SubjectController::class,'show']);
 Route::put('/subject/{id}', [SubjectController::class, 'update']);
 Route::delete('/subject/{id}', [SubjectController::class, 'destroy']);
 
+
 Route::apiResource('/enroll', EnrollController::class);
+Route::get('/enroll/{id}', [EnrollController::class, 'show']);
 Route::post('/enroll', [EnrollController::class, 'store']);
+Route::put('/enroll/{id}', [EnrollController::class, 'update']);
+
+Route::delete('/enroll/{id}', [EnrollController::class, 'destroy']);
 
 
 
