@@ -41,10 +41,13 @@ Route::get('/subject/{id}', [SubjectController::class,'show']);
 Route::put('/subject/{id}', [SubjectController::class, 'update']);
 Route::delete('/subject/{id}', [SubjectController::class, 'destroy']);
 
-Route::apiResource('/attendance', AttendanceController::class);
-Route::post('/attendance', [AttendanceController::class, 'store']);
-
 Route::apiResource('/enroll', EnrollController::class);
 Route::post('/enroll', [EnrollController::class, 'store']);
 
+
+
+Route::apiResource('/attendance', AttendanceController::class);
 Route::get('/attendance/{id}', [AttendanceController::class, 'show']);
+Route::post('/attendance', [AttendanceController::class, 'store']);
+Route::put('/attendance/{id}', [AttendanceController::class, 'update']);
+Route::delete('/attendance/{id}', [AttendanceController::class, 'destroy']);

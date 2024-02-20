@@ -67,16 +67,27 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Attendance $attendance)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'enroll_id' => 'required',
+            'date' => 'required|date',
+            'attendance' => 'required|in:A,T,F',
+
+        ]);
+
+        $students = Attendance::findOrFail($id);
+        $students->update($request->all());
+        return response()->json($students);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attendance $attendance)
+    public function destroy($id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+        $attendance->delete();
+        return response()->json($attendance);
     }
 }
