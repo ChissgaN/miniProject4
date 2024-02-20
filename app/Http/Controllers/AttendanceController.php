@@ -50,9 +50,10 @@ class AttendanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Attendance $attendance)
+    public function show($id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+        return response()->json($attendance);
     }
 
     /**
